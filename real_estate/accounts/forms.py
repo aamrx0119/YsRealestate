@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.contrib import messages
+from home.models import House_model , Profile
 
 class Sign_up (forms.Form):
     username = forms.CharField(max_length=50,widget=forms.TextInput(attrs={'class':'form-control'}))
@@ -35,3 +36,37 @@ class Log_in (forms.Form) :
     username = forms.CharField(max_length=50,widget=forms.TextInput(attrs={'class':'form-control'}))  
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control'}),max_length=65)
 
+class House_Model_Form (forms.ModelForm):
+    class Meta :
+        model = House_model
+        fields = ('name','compony','information')
+
+        labels = {
+            "name": "Name ",
+            "compony": "Compony ",
+            "information": "Detail ",
+        }
+        widgets = {
+
+            'name': forms.TextInput(attrs={'class':'form-control',}),
+            'information': forms.Textarea(attrs={'class':'form-control'}),
+            'compony': forms.TextInput(attrs={'class':'form-control'}),
+            # 'picture1': forms.FileInput(attrs={"name":"img[]","class":"file-upload-default"}),
+        }
+class Change_Profile (forms.ModelForm):
+    class Meta :
+        model = Profile
+        fields = ('first_name','last_name',)
+
+        labels = {
+            "first_name": "Name ",
+            "last_name": "Lastname ",
+            # "picture": "Your picture ",
+        }
+        widgets = {
+
+            'first_name': forms.TextInput(attrs={'class':'form-control',}),
+            'last_name': forms.TextInput(attrs={'class':'form-control'}),
+            # 'picture': forms.TextInput(attrs={'class':'form-control'}),
+            # 'picture1': forms.FileInput(attrs={"name":"img[]","class":"file-upload-default"}),
+        }

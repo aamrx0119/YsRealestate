@@ -1,0 +1,68 @@
+{% extends 'base.html'%}
+
+{% block content %}
+
+  /* Styles for wrapping the search box */
+
+<div class="main">
+  
+  <!-- Another variation with a button -->
+  <div class="input-group">
+    <input type="text" class="form-control" placeholder="Search this blog">
+    <div class="input-group-append">
+      <button class="btn btn-secondary" type="button">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </div>
+  
+  
+</div> 
+<section id="gallery">
+ <div class="container">
+   <div class="row">
+  {% for house in houses %}
+   <div class="col-lg-4 mb-4">
+   <div class="card" style="height:11cm;">
+     <img src="{{ house.picture1.url }}" style="height: 6cm;" alt="" class="card-img-top">
+     <div class="card-body" style="height:5cm;">
+       <h5 class="card-title">{{house.name}}</h5>
+       <p class="card-text">{{house.information|truncatewords:15}}</p>
+       <a href="{% url 'home:detail_home' house.id %}" class="btn btn-outline-success btn-sm" >Read More</a>
+       <a href="#" class="btn btn-outline-danger btn-sm"><i class="bi bi-heart"></i></a>
+     </div>
+    </div>
+   </div>
+   {% endfor%}
+ </div>
+</div>
+</section>
+
+{% if houses.has_other_pages %}
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    {% if houses.has_previous %}
+    <li class="page-item">
+      <a class="page-link" href="?page=1"> First</a>
+    </li>
+    <a class="page-link" href="?page={{ houses.previous_page_number }}" tabindex="-1" >Previous</a> 
+      {% endif %}
+    {% for i in houses.paginator.page_range %}
+      {% if houses.number == i %}
+        <li class="page-item active"><a class="page-link" href="{{houses.page_number}}"> {{i}}</a></li>
+        {% else %}
+        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{i}}</a></li>
+        {% endif %}
+    {% endfor %}
+    {% if houses.has_next  %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ houses.next_page_number }}">Next</a>
+    </li>
+      <a class="page-link" href="?page={{ houses.paginator.num_pages }}">Last</a>
+      {% endif %}
+  </ul>
+</nav>
+{% endif %}
+
+  
+{% endblock content %}

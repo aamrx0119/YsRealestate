@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+
+<br><br><br><br><br><br><br><br>
+
+<section id="gallery">
+    <div class="container">
+      <div class="row">
+      <div class="col-lg-4 mb-4">
+      <div class="card" style="height:12cm;">
+        <img src="{{ house.picture1.url }}" style="height: 6cm;" alt="" class="card-img-top">
+        <div class="card-body" style="height:5cm;">
+          <h5 class="card-title">{{house.name}}</h5>
+          <p class="card-text">{{house.information|truncatewords:15}}</p>
+          <a href="{% url 'home:detail_home' house.id %}" class="btn btn-outline-success btn-sm" >Read More</a>
+          <a href="" class="btn btn-outline-danger btn-sm"><i class="bi bi-heart"></i></a>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</section>
+<div class="card_color">
+     <p>helo</p>
+</div>
+
+
+
+
+{% endblock content %}
+
