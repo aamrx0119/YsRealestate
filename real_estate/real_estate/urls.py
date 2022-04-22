@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path , include
 from django.conf import settings
 from django.conf.urls.static import static
+from rest_framework.authtoken.views import obtain_auth_token
 
 
 urlpatterns = [
@@ -24,9 +25,17 @@ urlpatterns = [
     path("i18n/", include("django.conf.urls.i18n")),
     path('',include('home.urls')),
     path('accounts/',include('accounts.urls')),
+    # path('api-auth/', include('rest_framework.urls')),
+    path('api/',include('api.urls')),
+    path('api/token-auth/', obtain_auth_token),
 ] 
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+
+handler404 = 'home.views.Error_404'
+handler505 = 'home.views.Error_505'
 
  

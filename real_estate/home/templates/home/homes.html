@@ -1,13 +1,13 @@
 {% extends 'base.html'%}
-
+{% load static %}
 {% block content %}
 
-  /* Styles for wrapping the search box */
 
+<br>
 <div class="main">
   
   <!-- Another variation with a button -->
-  <div class="input-group">
+  <!-- <div class="input-group">
     <input type="text" class="form-control" placeholder="Search this blog">
     <div class="input-group-append">
       <button class="btn btn-secondary" type="button">
@@ -15,24 +15,36 @@
       </button>
     </div>
   </div>
-  
+   -->
   
 </div> 
 <section id="gallery">
- <div class="container">
-   <div class="row">
-  {% for house in houses %}
-   <div class="col-lg-4 mb-4">
-   <div class="card" style="height:11cm;">
+  <div class="container">
+    <div class="row">
+      {% for house in houses %}
+      <div class="col-lg-4 mb-4">
+        <div class="card" style="height:11cm;">
      <img src="{{ house.picture1.url }}" style="height: 6cm;" alt="" class="card-img-top">
      <div class="card-body" style="height:5cm;">
-       <h5 class="card-title">{{house.name}}</h5>
-       <p class="card-text">{{house.information|truncatewords:15}}</p>
-       <a href="{% url 'home:detail_home' house.id %}" class="btn btn-outline-success btn-sm" >Read More</a>
-       <a href="#" class="btn btn-outline-danger btn-sm"><i class="bi bi-heart"></i></a>
-     </div>
+      <h5 class="card-title">{{house.name}}</h5>
+      <p class="card-text">{{house.information|truncatewords:15}}</p>
+      <a href="{% url 'home:detail_home' house.id %}" class="btn btn-outline-success btn-sm" >Read More</a>
+      <form action="{% url 'home:like_home' %}" method="POST" class="like-form" id="{{house.id}}">
+      
+        {% csrf_token %}
+        <!-- I have to change it  -->
+      {% if user.is_authenticated %}
+        {% if profile not in house.liked.all %}
+        <button type="submit" class="btn btn-outline-danger btn-sm like-btn{{house.id}}">Like<i class="bi bi-heart likes-color{{house.id}}"></i></button>
+        {% else %}
+        <button type="submit" class="btn btn-outline-danger btn-sm like-btn{{house.id}}">Unlike<i class="bi bi-heart-fill likes-color{{house.id}}"></i></button>
+        {% endif %}
+      {% endif%}
+      </form>
+      
     </div>
-   </div>
+  </div>
+</div>
    {% endfor%}
  </div>
 </div>
@@ -66,3 +78,9 @@
 
   
 {% endblock content %}
+
+
+
+{% block js_file %}
+  <script src="{% static 'home/js/homes.js' %}"></script>
+{% endblock js_file %}

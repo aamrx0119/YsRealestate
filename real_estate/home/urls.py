@@ -6,4 +6,5 @@ urlpatterns = [
     path('',views.Home_view,name='f-main'),
     path('homes/',views.Homes,name='homes'),
     path('home/<int:id>',views.Detail_home,name='detail_home'),
+    path('home/like/',views.Like_Home,name='like_home'),
 ]

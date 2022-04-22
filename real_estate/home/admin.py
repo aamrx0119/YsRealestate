@@ -5,3 +5,5 @@ from . import models
 admin.site.register(models.House_model)
 admin.site.register(models.Profile)
 admin.site.register(models.images_house)
+admin.site.register(models.Like_house)
+admin.site.register(models.Category)

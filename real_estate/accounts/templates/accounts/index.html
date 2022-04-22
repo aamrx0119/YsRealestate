@@ -1,41 +1,59 @@
 {% load static %}
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-  	<title>Login 10</title>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Corona Admin</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="{% static 'accounts/assets/vendors/mdi/css/materialdesignicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'accounts/assets/vendors/css/vendor.bundle.base.css' %}">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="{% static 'accounts/assets/css/style.css' %}">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="{% static 'accounts/assets/images/favicon.png' %}" />
+  </head>
+  <body>
+    <div class="container-scroller">
+      <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="row w-100 m-0">
+          <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">
+            <div class="card col-lg-4 mx-auto">
+              <div class="card-body px-5 py-5">
+                <h3 class="card-title text-left mb-3">{% block name %}{% endblock name %}</h3>
+ 
+				{% include 'nav/messages.html'%}
+				{% block content %}
+				{% endblock content %}
 
-	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
-
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	
-	<link rel="stylesheet" href="{% static 'accounts/css/style.css' %}">
-
-	</head>
-	<body class="img js-fullheight" style="background-image: url(/static/accounts/images/bg.jpg);">
-	<section class="ftco-section">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-md-6 text-center mb-5">
-					<h2 class="heading-section">{% block name %}{% endblock name %}</h2>
-				</div>
-			</div>
-			<div class="row justify-content-center">
-				<div class="col-md-6 col-lg-4">
-					<div class="login-wrap p-0">
-		      	<h3 class="mb-4 text-center">Have an account?</h3>
-{% include 'nav/messages.html'%}
-{% block content %}
-{% endblock content %}
-		</div>
-	</section>
-
-	<script src="{% static 'accounts/js/jquery.min.js' %}"></script>
-  <script src="{% static 'accounts/js/popper.js' %}"></script>
-  <script src="{% static 'accounts/js/bootstrap.min.js' %}"></script>
-  <script src="{% static 'accounts/js/main.js' %}"></script>
-
-	</body>
-</html>
+              </div>  
+            </div>  
+          </div>  
+          <!-- content-wrapper ends -->
+        </div>  
+        <!-- row ends -->
+      </div>  
+      <!-- page-body-wrapper ends -->
+    </div>  
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="{% static 'accounts/assets/vendors/js/vendor.bundle.base.js' %}"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="{% static 'accounts/assets/js/off-canvas.js' %}"></script>
+    <script src="{% static 'accounts/assets/js/hoverable-collapse.js' %}"></script>
+    <script src="{% static 'accounts/assets/js/misc.js' %}"></script>
+    <script src="{% static 'accounts/assets/js/settings.js' %}"></script>
+    <script src="{% static 'accounts/assets/js/todolist.js' %}"></script>
+    <!-- endinject -->
+  </body>  
+</html>  
 
