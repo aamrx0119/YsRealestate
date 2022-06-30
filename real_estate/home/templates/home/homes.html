@@ -33,7 +33,7 @@
       
         {% csrf_token %}
         <!-- I have to change it  -->
-      {% if user.is_authenticated %}
+      {% if exist %}
         {% if profile not in house.liked.all %}
         <button type="submit" class="btn btn-outline-danger btn-sm like-btn{{house.id}}">Like<i class="bi bi-heart likes-color{{house.id}}"></i></button>
         {% else %}

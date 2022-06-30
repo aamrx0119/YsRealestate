@@ -1,5 +1,5 @@
 from . import views
-from django.urls import path
+from django.urls import path , include
 
 app_name = 'accounts'
 urlpatterns = [
@@ -9,6 +9,7 @@ urlpatterns = [
     path('confirm/done/', views.Password_Reset_Complete.as_view(),name='password_reset_complete'),
     path('signup/',views.Signup_Acc,name='signup_view'),
     path('login/',views.Login_Acc,name='login_view'),
+    
     path('logout/',views.Logout_Acc,name='logout_view'),
     path('profile/dashboard/<int:id>/',views.Dashboard_Acc,name='dashboard_view'),
     path('profile/dashboard-form/<int:id>/',views.Form_page,name='form_page'),

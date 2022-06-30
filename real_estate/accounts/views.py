@@ -49,12 +49,15 @@ def Login_Acc (request) :
         form = forms.Log_in(request.POST)
         if form.is_valid () :
             cd = form.cleaned_data
-            user = authenticate(username=cd['username'],password=cd['password'])
+            print(cd['username'])
+            print('*'*90)
+
+            try:
+                user = authenticate(username=User.objects.get(email=cd['username']),password=cd['password'])
+            except:
+                user = authenticate(username=cd['username'],password=cd['password'])
+                
             if user is not None :
-                obj = User.objects.get(username=cd['username'])
-                up_time = Profile.objects.get(user=obj)
-                up_time.updated = timezone.now()
-                up_time.save()
                 # messages.success(request,'Log in successfully','success')
                 login(request,user)
                 if next_url:

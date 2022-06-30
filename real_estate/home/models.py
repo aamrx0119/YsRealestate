@@ -104,3 +104,17 @@ class Category (models.Model) :
 
 
 
+class ContactUS (models.Model) :
+    name = models.CharField(max_length=25)
+    email = models.EmailField(max_length=50)
+    subject = models.CharField(max_length=20)
+    pm = models.TextField(max_length=150)
+
+
+    def __str__(self) :
+        return f"{self.name} & {self.email}" 
+
+
+
+
+

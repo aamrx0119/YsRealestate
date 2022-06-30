@@ -46,11 +46,22 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'actions.apps.ActionsConfig',
     'api.apps.ApiConfig',
+    'dj_rest_auth',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'dj_rest_auth.registration',
+    # social accounts
+    'social_django',
 
 
     'rest_framework',
     'rest_framework.authtoken',
 ]
+
+SOCIAL_AUTH_JSONFIELD_ENABLED = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -61,6 +72,37 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
+]
+
+
+AUTHENTICATION_BACKENDS = (
+
+    'social_core.backends.google.GoogleOAuth2',
+    
+
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
+
+SOCIAL_AUTH_LOGIN_ERROR_URL = 'home:f-main'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = 'home:f-main'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '218078959457-e9uvnjrog1pcu36hbtf51k84c4dje82l.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
+    'https://www.googleapis.com/auth/userinfo.email',
+    # 'https://www.googleapis.com/auth/userinfo.profile',
 ]
 
 USE_I18N = True
@@ -83,6 +125,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -114,10 +158,16 @@ REST_FRAMEWORK = {
     
     'DEFAULT_AUTHENTICATION_CLASSES': [
         # "rest_framework.authentication.SessionAuthentication",
-        'rest_framework.authentication.TokenAuthentication',
+        # 'rest_framework.authentication.TokenAuthentication',
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'dj_rest_auth.jwt_auth.JWTCookieAuthentication',
     ],
 
 }
+
+REST_USE_JWT = True
+JWT_AUTH_COOKIE = 'access'
+JWT_AUTH_REFRESH_COOKIE = 'refresh'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -136,6 +186,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+SITE_ID = 1
 
 
 # Internationalization

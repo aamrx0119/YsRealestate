@@ -4,6 +4,8 @@
 {% block name %}Log in{% endblock name %}
 {% block content %}
 
+{% load socialaccount %}
+
 <form method="POST">
 	<div class="form-group">
 		<br>
@@ -21,9 +23,17 @@
 	<div class="text-center">
 	  <button type="submit" class="btn btn-primary btn-block enter-btn">Login</button>
 	</div>
+	
+</form>
+<form action="{% url 'social:begin' 'google-oauth2' %}">
+	<div class="d-flex">
 
-	<p class="sign-up">Don't have an Account?<a href="{% url 'accounts:signup_view' %}"> Sign Up</a></p>
-  </form>
+		<button class="btn btn-google mr-2 col">
+		<i class="mdi mdi-google-plus"></i> Google plus </button>
+	</div>
+</form>
+<p class="sign-up">Don't have an Account?<a href="{% url 'accounts:signup_view' %}"> Sign Up</a></p>
+<!-- <a href="{% url 'social:begin' 'google-oauth2' %}">Login via Google </a> -->
 
 {% endblock content %}
 
