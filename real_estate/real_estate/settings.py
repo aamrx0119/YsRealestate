@@ -105,6 +105,7 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
     # 'https://www.googleapis.com/auth/userinfo.profile',
 ]
 
+
 USE_I18N = True
 ROOT_URLCONF = 'real_estate.urls'
 LANGUAGE_CODE = 'en'
